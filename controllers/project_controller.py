@@ -8,10 +8,8 @@ from models.project_model import Project
 
 
 class ProjectController:
-    def __init__(self, app, project_view):
+    def __init__(self):
         self.projects = []
-        self.selected_project = None
-        self.selected_parameters = {}  # Dictionary to store selected parameters
 
     def create_project(self, project_name=None, ci_type=None):
         try:

@@ -7,6 +7,7 @@ from controllers.project_controller import ProjectController
 class ProjectView(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
+        self.method_var = None
         self.create_button = None
         self.project_name_entry = None
         self.project_name_label = None
@@ -17,6 +18,7 @@ class ProjectView(tk.Frame):
         self.ci_type_var = None
         self.ci_type_label = None
         self.parent = parent
+        self.create_analysis_method_radio_buttons(self)
 
     def new_project(self):
         # Create a data entry frame within the sidebar frame
@@ -80,16 +82,11 @@ class ProjectView(tk.Frame):
         project_name = self.project_name_entry.get()
         ci_type = self.ci_type_var.get()
 
-        print("Project Name:", project_name)
-        print("CI Type:", ci_type)
-
         # Create an instance of ProjectController
         project_controller = ProjectController()
 
         # Create the new project using the project controller
         new_project = project_controller.create_project(project_name, ci_type)
-
-        print("New Project:", new_project)
 
         if new_project:
             # Update entry widget with project name and set combo box value
@@ -131,6 +128,32 @@ class ProjectView(tk.Frame):
         ci_type_value = tk.Label(details_frame, text=project.ci_type, bg=self.parent.sidebar_color,
                                  fg="white", font=("", 12))
         ci_type_value.grid(row=1, column=1, sticky="w", padx=(0, 10), pady=(5, 20))
+
+        # Add section divider after CI Type details
+        ci_type_divider = ttk.Separator(details_frame, orient="horizontal")
+        ci_type_divider.grid(row=2, column=0, columnspan=2, sticky="ew", padx=0, pady=0)
+
+        # Add section header
+        section_header = tk.Label(details_frame, text="Select Analysis Method", bg=self.parent.sidebar_color,
+                                  fg="white", font=("", 13, "bold"))
+        section_header.grid(row=3, column=0, columnspan=2, sticky="w", padx=10, pady=(10, 5))
+
+        # Create radio buttons for selecting analysis method
+        self.create_analysis_method_radio_buttons(details_frame)
+
+    def create_analysis_method_radio_buttons(self, parent):
+        analysis_methods = ["Monte Carlo Simulation", "Other Analysis Method"]  # Add more as needed
+        self.method_var = tk.StringVar(value=analysis_methods[0])  # Select the first method by default
+
+        for i, method in enumerate(analysis_methods):
+            radio_button = tk.Radiobutton(parent, text=method, variable=self.method_var,
+                                          value=method, bg="white", font=("", 12),
+                                          command=self.analysis_method_selected)
+            radio_button.grid(row=4 + i, column=0, columnspan=2, sticky="w", padx=(20, 10), pady=(5, 5))
+
+    def analysis_method_selected(self):
+        selected_method = self.method_var.get()
+        print("Selected Analysis Method:", selected_method)
 
     def load_existing_projects(self):
         # Add code here to load existing projects from file

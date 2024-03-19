@@ -14,11 +14,11 @@ class Quantalysis(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         self.title("Quantitative Risk Analysis Tool")
-        self.sidebar_color=sidebar_color
+        self.sidebar_color = sidebar_color
 
         # ------------- BASIC APP LAYOUT -----------------
 
-        self.geometry("1100x700")
+        self.geometry("1100x900")
         self.resizable(0, 0)
         self.title('Quantitative Risk Analysis Tool')
         self.config(background=selection_color)
@@ -137,5 +137,4 @@ class Frame2(tk.Frame):
 
 
 app = Quantalysis()
-project_view = ProjectView(app)
 app.mainloop()

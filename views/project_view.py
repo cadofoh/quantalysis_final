@@ -185,6 +185,17 @@ class ProjectView(tk.Frame):
                                    fg="white", font=("", 12))
             param_label.grid(row=8 + i * 2, column=0, sticky="w", padx=10, pady=(10, 0))
 
+            tooltips = [
+                "Enter the frequency of equipment failures per year.",
+                "Enter the variability in repair time after an outage, measured in hours or days.",
+                "Enter the fluctuations in electricity demand, expressed as a percentage deviation from average load.",
+                "Enter the variability in available generation capacity, measured in megawatts (MW).",
+                "Enter the intensity of weather conditions impacting the power grid, measured on a scale from 1 to 10.",
+                "Enter the likelihood of human errors affecting grid operations, expressed as a percentage.",
+                "Enter the amount allocated to grid maintenance and upgrades, measured in currency (e.g., USD, GBP)."
+            ]
+            create_tooltip(param_label, tooltips[i])
+
             # Create entry field for parameter value
             entry_var = tk.StringVar()
             entry_field = tk.Entry(parent, textvariable=entry_var, font=("", 11))

@@ -1,0 +1,13 @@
+About Quantitative Risk Analysis Tool:
+
+The Quantitative Risk Analysis Tool is a software application designed to assist in the quantitative assessment of risks associated with critical infrastructure systems.
+
+It allows users to input various parameters related to different critical infrastructure sectors, such as power grids, transportation systems, and financial institutions, to analyse and evaluate potential risks.
+
+This tool is developed as part of a project aimed at enhancing the resilience of critical infrastructure systems against various threats and hazards.
+It leverages multiple quantitative risk analysis techniques to provide insights into the impact of different risk scenarios.
+
+Developed by: [Chief Adofoh]
+Version: 1.0
+Copyright © [2024] Aston Uni FYP
+Contact: chiefadofoh1@gmail.com

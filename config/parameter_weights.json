@@ -1,0 +1,17 @@
+{
+  "financial_institutions": {
+    "parameters": {
+    }
+  },
+  "Power Grids": {
+    "parameters": {
+      "Failure Rate of Equipment": 0.25,
+      "Repair Time Distribution": 0.20,
+      "Load Variability": 0.1,
+      "Generation Capacity Distribution": 0.10,
+      "Weather Severity Index": 0.25,
+      "Human Error Probability": 0.05,
+      "Investment in Infrastructure": 0.05
+    }
+  }
+}

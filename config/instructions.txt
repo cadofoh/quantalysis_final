@@ -1,0 +1,15 @@
+Welcome to the Quantitative Risk Analysis Tool!
+
+Instructions:
+
+Start a New Project: Click on "New Project" to begin a new risk analysis project. Enter the project name and select the Critical Infrastructure (CI) type.
+
+Load an Existing Project: If you have a saved project, click on "Load Project" to open it and continue your analysis.
+
+Input Parameters: Once a project is opened, input the required parameters for risk analysis. Select the risk analysis method you prefer.
+
+Begin Risk Analysis: After inputting parameters, click "Begin Analysis" to start the risk analysis process. This will generate visualizations and reports based on your inputs.
+
+Help and Support: If you need assistance using specific features of the tool or have any inquiries, click on the "Help" menu and select "Instructions". You can also contact our support team for further assistance.
+
+Thank you for choosing the Quantitative Risk Analysis Tool!

@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import messagebox
+
 from views.project_view import ProjectView
 
 # -------------------------- DEFINING GLOBAL VARIABLES -------------------------
@@ -33,10 +35,15 @@ class Quantalysis(tk.Tk):
         file_menu = tk.Menu(menubar, tearoff=0)
         file_menu.add_command(label="New Project", command=self.new_project)
         file_menu.add_command(label="Load Project", command=self.load_project)
-        # file_menu.add_command(label="Save Project", command=self.save_project)  # Move save_project here
         file_menu.add_separator()
         file_menu.add_command(label="Exit", command=self.quit)
         menubar.add_cascade(label="File", menu=file_menu)
+
+        # Create Help menu
+        help_menu = tk.Menu(menubar, tearoff=0)
+        help_menu.add_command(label="Instructions", command=self.show_instructions)
+        help_menu.add_command(label="About", command=self.show_about)
+        menubar.add_cascade(label="Help", menu=help_menu)
 
         # ---------------- HEADER ------------------------
 
@@ -118,6 +125,16 @@ class Quantalysis(tk.Tk):
         # Open the new project window in the ProjectView
         self.project_view.new_project()
         print("After calling project_view.new_project()")
+
+    def show_instructions(self):
+        with open('config/instructions.txt', 'r') as file:
+            instructions = file.read()
+        messagebox.showinfo("Instructions", instructions)
+
+    def show_about(self):
+        with open('config/about.txt', 'r') as file:
+            about = file.read()
+        messagebox.showinfo("About", about)
 
 
 class Frame1(tk.Frame):

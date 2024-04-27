@@ -24,7 +24,7 @@ pip install numpy scipy
 3. Run the Application: Run the main.py file to start the application:
 
 ```
-python main.py
+python app.py
 ```
 
 ### Troubleshooting

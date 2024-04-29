@@ -1,9 +1,36 @@
 {
   "financial_institutions": {
     "parameters": {
+      "Liquidity Ratio": 0.2,
+      "Capital Adequacy Ratio": 0.15,
+      "Non-Performing Loans Ratio": 0.15,
+      "Return on Assets": 0.15,
+      "Compliance Violation Counts": 0.15,
+      "Cybersecurity Incidents Count": 0.1,
+      "Operational Efficiency Index": 0.1
     }
   },
-  "Power Grids": {
+  "telecommunication_networks": {
+    "parameters": {
+      "Network Downtime": 0.2,
+      "Mean Time to Repair (MTTR)": 0.15,
+      "Data Loss Rate": 0.15,
+      "Cybersecurity Incident Frequency": 0.2,
+      "Network Performance Degradation Rate": 0.15,
+      "Service Disruption Frequency": 0.15
+    }
+  },
+  "transportation_systems": {
+    "parameters": {
+      "Traffic Volume": 0.2,
+      "Infrastructure Age": 0.15,
+      "Incident Response Time": 0.15,
+      "Weather Sensitivity Index": 0.2,
+      "Road Maintenance Budget": 0.15,
+      "Traffic Accident Rate": 0.15
+    }
+  },
+  "power_grids": {
     "parameters": {
       "Failure Rate of Equipment": 0.25,
       "Repair Time Distribution": 0.20,

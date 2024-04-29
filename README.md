@@ -14,8 +14,9 @@ The Quantitative Risk Analysis Tool is a Python-based application designed to pe
 1. Clone the Repository: Clone the repository to a local directory using Git:
 
 ```
-git clone https://github.com/your-username/quantitative-risk-analysis-tool.git
+git clone https://github.com/cadofoh/quantalysis_final
 ```
+
 2. Install Required Libraries: Install the required libraries using pip:
 
 ```

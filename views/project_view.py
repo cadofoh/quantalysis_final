@@ -4,7 +4,7 @@ from tooltip import create_tooltip
 from tkinter import ttk
 from controllers.project_controller import ProjectController
 import numpy as np
-from scipy.stats import poisson, norm, beta, randint
+from scipy.stats import poisson, norm, beta, uniform, expon, randint, lognorm
 
 
 class ProjectView(tk.Frame):
@@ -170,7 +170,7 @@ class ProjectView(tk.Frame):
         self.parameter_entries = []  # List to store references to Entry widgets
         parameters = ["Liquidity Ratio (0-1)",
                       "Capital Adequacy Ratio (0-1)",
-                      "Non-Performing Loans Ration (%)",
+                      "Non-Performing Loans Ratio (%)",
                       "Return on Assets (%)",
                       "Compliance Violation Counts",
                       "Cybersecurity Incidents Count",
@@ -441,11 +441,8 @@ class ProjectView(tk.Frame):
             mean = np.mean(sample_values)
             std_dev = np.std(sample_values)
             parameter_weight = parameter_weights.get(param_name)
-            print("Parameter:", param_name)
-            print("Parameter Weight:", parameter_weight)
             deviation = np.abs(sample_values - mean) / std_dev
             risk_scores[param_name] = np.mean(deviation) * parameter_weight
-            print("Risk Score:", risk_scores[param_name])
 
         # Calculate overall risk score
         overall_risk_score = sum(risk_scores.values())
@@ -458,10 +455,11 @@ class ProjectView(tk.Frame):
         else:
             risk_level = "High"
 
-        # Display risk analysis results
-        print("Risk Analysis Results:")
-        print(f"Overall Risk Score: {overall_risk_score}")
-        print(f"Risk Level: {risk_level}")
+            # Display quantitative risk analysis results
+        print("Quantitative Risk Analysis Results:")
+        print(f"CI Type: {ci_type}")
+        print(f"Overall Weighted Risk Score: {overall_risk_score:.2f}")
+        print(f"Risk Level: {risk_level}\n")
 
     def get_parameter_values(self):
         parameter_values = [entry.get() for entry in self.parameter_entries]
@@ -480,12 +478,13 @@ class ProjectView(tk.Frame):
 
         if ci_type == "Power Grids":
             failure_rate_dist = poisson(mu=parameter_values[0])
-            repair_time_dist = norm(loc=parameter_values[1], scale=parameter_values[2])
+            repair_time_dist = norm(loc=parameter_values[1],
+                                    scale=parameter_values[1] * 0.1)  # Assuming 10% variability
             load_variability_dist = beta(a=2, b=5)  # Example values for shape parameters
-            generation_capacity_dist = norm(loc=parameter_values[3], scale=parameter_values[4])
-            weather_severity_dist = randint(low=1, high=11)  # Discrete uniform distribution
-            human_error_dist = beta(a=2, b=5)  # Example values for shape parameters
-            infrastructure_investment_dist = norm(loc=parameter_values[5], scale=parameter_values[6])
+            generation_capacity_dist = norm(loc=parameter_values[3], scale=parameter_values[3] * 0.1)
+            weather_severity_dist = uniform(loc=1, scale=9)  # Discrete uniform distribution
+            human_error_dist = beta(a=2, b=5, loc=0, scale=0.01)  # Example values for shape parameters
+            infrastructure_investment_dist = lognorm(loc=0, scale=parameter_values[6], s=0.5)
 
             distributions["Failure Rate of Equipment"] = failure_rate_dist
             distributions["Repair Time Distribution"] = repair_time_dist
@@ -495,7 +494,52 @@ class ProjectView(tk.Frame):
             distributions["Human Error Probability"] = human_error_dist
             distributions["Investment in Infrastructure"] = infrastructure_investment_dist
 
-        # Add conditions for other CI types here
+        elif ci_type == "Financial Institutions":
+            liquidity_rate_dist = beta(a=2, b=2, loc=0, scale=1)
+            capital_adeq_dist = beta(a=2, b=2, loc=0, scale=1)
+            non_perf_ratio_dist = beta(a=2, b=5, loc=0, scale=0.01)
+            roa_dist = norm(loc=parameter_values[3], scale=parameter_values[3] * 0.1)
+            comp_viol_dist = poisson(mu=parameter_values[4])
+            cyber_incident_dist = poisson(mu=parameter_values[5])
+            oper_index_dist = beta(a=2, b=5, loc=0, scale=1)
+
+            distributions["Liquidity Ratio"] = liquidity_rate_dist
+            distributions["Capital Adequacy Ratio"] = capital_adeq_dist
+            distributions["Non-Performing Loans Ratio"] = non_perf_ratio_dist
+            distributions["Return on Assets"] = roa_dist
+            distributions["Compliance Violation Counts"] = comp_viol_dist
+            distributions["Cybersecurity Incidents Count"] = cyber_incident_dist
+            distributions["Operational Efficiency Index"] = oper_index_dist
+
+        elif ci_type == "Telecommunication Networks":
+            network_downtime_dist = expon(scale=parameter_values[0])
+            mttr_dist = expon(scale=parameter_values[1])
+            data_loss_rate_dist = beta(a=2, b=5, loc=0, scale=1)
+            cyber_incident_dist = poisson(mu=parameter_values[3])
+            network_degradation_dist = beta(a=2, b=5, loc=0, scale=1)
+            service_disruption_dist = poisson(mu=parameter_values[5])
+
+            distributions["Network Downtime"] = network_downtime_dist
+            distributions["Mean Time to Repair (MTTR)"] = mttr_dist
+            distributions["Data Loss Rate"] = data_loss_rate_dist
+            distributions["Cybersecurity Incident Frequency"] = cyber_incident_dist
+            distributions["Network Performance Degradation Rate"] = network_degradation_dist
+            distributions["Service Disruption Frequency"] = service_disruption_dist
+
+        elif ci_type == "Transportation Systems":
+            traffic_volume_dist = poisson(mu=parameter_values[0])
+            infra_agge_dist = norm(loc=parameter_values[1], scale=parameter_values[1] * 0.1)
+            incident_response_dist = expon(scale=parameter_values[2])
+            weather_severity_dist = uniform(loc=1, scale=9)  # Discrete uniform distribution
+            road_maintenance_dist = norm(loc=parameter_values[4], scale=parameter_values[4] * 0.1)
+            traffic_rate_dist = poisson(mu=parameter_values[5])
+
+            distributions["Traffic Volume"] = traffic_volume_dist
+            distributions["Infrastructure Age"] = infra_agge_dist
+            distributions["Incident Response Time"] = incident_response_dist
+            distributions["Weather Sensitivity Index"] = weather_severity_dist
+            distributions["Road Maintenance Budget"] = road_maintenance_dist
+            distributions["Traffic Accident Rate"] = traffic_rate_dist
 
         return distributions
 

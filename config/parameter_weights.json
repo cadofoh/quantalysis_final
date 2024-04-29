@@ -1,5 +1,5 @@
 {
-  "financial_institutions": {
+  "Financial Institutions": {
     "parameters": {
       "Liquidity Ratio": 0.2,
       "Capital Adequacy Ratio": 0.15,
@@ -10,7 +10,7 @@
       "Operational Efficiency Index": 0.1
     }
   },
-  "telecommunication_networks": {
+  "Telecommunication Networks": {
     "parameters": {
       "Network Downtime": 0.2,
       "Mean Time to Repair (MTTR)": 0.15,
@@ -20,7 +20,7 @@
       "Service Disruption Frequency": 0.15
     }
   },
-  "transportation_systems": {
+  "Transportation Systems": {
     "parameters": {
       "Traffic Volume": 0.2,
       "Infrastructure Age": 0.15,
@@ -30,7 +30,7 @@
       "Traffic Accident Rate": 0.15
     }
   },
-  "power_grids": {
+  "Power Grids": {
     "parameters": {
       "Failure Rate of Equipment": 0.25,
       "Repair Time Distribution": 0.20,
